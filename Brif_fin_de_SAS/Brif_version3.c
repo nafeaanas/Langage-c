@@ -1,11 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+void  Retrait();
+void  Depot();
+void Operations ();
+void PleuCompte();
+void AjouCopmte();
 static int i=0,j=0,NE;
 struct info {
     char CIN [10];
     char nom [20],prenom [20];
-    double mantant ;
+    float mantant ;
 };
 struct info IF [100];
 
@@ -41,7 +46,7 @@ do
              case 2: { PleuCompte();
 
             }break;
-             case 3: { Operations
+             case 3: {  Operations ();
 
             }break;
              case 4: {
@@ -68,7 +73,7 @@ void AjouCopmte(){
           printf("==> Veuillez Entrer le Prenom :  ");
           scanf("%s",IF[i].prenom);
           printf("==> Veuillez Entrer le Montant :  ");
-          scanf("%lf",&IF[i].mantant);
+          scanf("%f",&IF[i].mantant);
      printf("\n");
     i++;
     j++;
@@ -87,16 +92,25 @@ void AjouCopmte(){
     for(i=x;i<NE+x;i++)
     {
           printf("Veuillez donner les informations de compte bancaire numero %d :\n",i+1);
-          AjouCopmte();
+         // AjouCopmte();
+         printf("==> Veuillez Entrer le CIN :  ");
+          scanf("%s",IF[i].CIN);
+          printf("==> Veuillez Entrer le Nom :  ");
+          scanf("%s",IF[i].nom);
+          printf("==> Veuillez Entrer le Prenom :  ");
+          scanf("%s",IF[i].prenom);
+          printf("==> Veuillez Entrer le Montant :  ");
+          scanf("%f",&IF[i].mantant);
+     printf("\n");
           j++;
           
      }
      }
-     void Operations (){
-         int choix;
-          do
+    void Operations (){
+        int choix;
+         do
                 {
-                     system("cls");
+                     //system("cls");
                    printf("\t\t\t:::::::::::::::::::::::::: Operations ::::::::::::::::::::::::::\n\n\n");
                    printf("\t\t\t 1- Retrait \n");
                    printf("\t\t\t 2- Depot\n");
@@ -107,57 +121,59 @@ void AjouCopmte(){
                 {
                 case 1:
                     {
-                        float s1;
-                        char CIN_user[10];
-
-                        printf("entre votre Cin :\t");
-                        scanf("%s",CIN_user);
-                        for(i=0;i<*p;i++)
-                        {
-                            if(strstr(CIN_user,IF[i].CIN))
-                            {
-                                printf("combien :\n");
-                                scanf("%f",&s1);
-                                if(s1>IF[i].mantant)
-                                {
-                                    printf("\n impossible votre sold inferieur a %.2f\n",s1);
-                                    break;
-                                }
-                                IF[i].mantant-=s1;
-                            }
-
-                        }
-
+                        Retrait();
                     }break;
                case 2:
                     {
-                        float s2;
-
-
-                         printf("entre votre Cin :\t");
-                        scanf("%s",CIN_user);
-                        for(i=0;i<*p;i++)
-                        {
-                            if(strstr(cin_user,C[i].cin))
-                            {
-                                printf("combien :\n");
-                                scanf("%f",&s2);
-                                C[i].montant+=s2;
-                            }
-                        }
-
+                        Depot();
                     }break;
                case 3:
                    {
-                       goto menu;
+                        menu();
 
                    }break;
-
-
-
-                }
+                   }
                 }while(choix!=3);
-     }
+        }
+ void Depot(){
+     float s2;
+ char cin_user[20];
+printf("entre votre Cin :\t");
+scanf("%s",cin_user);
+for(i=0;i<NE+j;i++)
+{
+  if(strcmp(cin_user,IF[i].CIN)==0)
+    {
+        printf("combien :\n");
+        scanf("%f",&s2);
+        IF[i].mantant+=s2;
+        printf("le mantant entrer est %.2f et le mantantant totale est %.2f \n",s2,IF[i].mantant);
+    }
+}
+}       
+  void Retrait()
+{
+float s1;
+char cin_user[20];
+printf("entre votre Cin :\t");
+scanf("%s",cin_user);
+for(i=0;i<NE+j;i++)
+    {
+ if(strcmp(cin_user,IF[i].CIN)==0)
+    {
+                    printf("combien :\n");
+                    scanf("%f",&s1);
+                    if(s1>IF[i].mantant)
+            {
+                system("cls");
+                printf("\n impossible votre sold inferieur a %.2f\n",s1);
+                break;
+            }
+      IF[i].mantant-=s1;
+      printf("le mantant Sortie est %.2f et le mantantant reste est %.2f \n",s1,IF[i].mantant);
+    }
+    }
+}
 
 int main(){
    menu();
